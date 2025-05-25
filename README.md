@@ -21,12 +21,17 @@ The frontend of the application is built using React and Vite. It provides a use
 
 ### Running the Frontend
 
-To run the frontend, navigate to the `movie-booking-app/frontend` directory and execute the following commands:
+To run the frontend, navigate to the `frontend` directory and execute the following commands:
 
 ```sh
 npm install
 npm run dev
 ```
+
+Once the development server starts, the frontend will be available at:
+**http://localhost:5173**
+
+The Vite development server will automatically open your browser to this URL, or you can manually navigate to it.
 
 ## Backend
 
@@ -47,22 +52,65 @@ The backend of the application is built using Node.js and Express. It provides a
 
 ### Running the Backend
 
-To run the backend, navigate to the `movie-booking-app/backend` directory and execute the following commands:
+To run the backend, navigate to the `backend` directory and execute the following commands:
 
 ```sh
 npm install
 npm start
 ```
 
+The backend API will be available at:
+**http://localhost:5001**
+
 ## Running with Docker
 
-To run the entire application using Docker, navigate to the `movie-booking-app/` directory and execute the following command:
+To run the entire application using Docker, navigate to the project root directory and execute the following command:
 
 ```sh
 . up.sh
 ```
 
 This will start the frontend, backend, and MongoDB services using Docker Compose.
+
+When running with Docker:
+- **Frontend**: http://localhost (port 80)
+- **Backend**: http://localhost:5001
+- **MongoDB**: Available internally to the application
+
+## Environment Configuration
+
+Before running the application, you need to configure the environment variables in the `.env` file. Create a `.env` file in the root directory and add the following variables:
+
+```properties
+# Frontend environment variables
+VITE_PAYPAL_CLIENT_ID=your_paypal_client_id_here
+NODE_ENV=development
+BACKEND_URL=http://localhost:5001
+
+# Backend environment variables
+MONGO_URI=your_mongodb_connection_string_here
+NODE_PORT=5001
+JWT_SECRET=your_jwt_secret_key_here
+FRONTEND_URL=http://localhost
+REDIS_URL=redis://default:your_redis_password@redis:6379
+
+# Redis password
+REDIS_PASSWORD=your_redis_password_here
+```
+
+### Required Environment Variables:
+
+- **VITE_PAYPAL_CLIENT_ID**: Your PayPal client ID for payment processing
+- **NODE_ENV**: Application environment (development/production)
+- **BACKEND_URL**: URL where the backend API is accessible
+- **MONGO_URI**: MongoDB connection string (Atlas or local MongoDB)
+- **NODE_PORT**: Port number for the backend server
+- **JWT_SECRET**: Secret key for JWT token generation and verification
+- **FRONTEND_URL**: URL where the frontend is accessible
+- **REDIS_URL**: Redis connection string for caching and session management
+- **REDIS_PASSWORD**: Password for Redis authentication
+
+**Important**: Replace the placeholder values with your actual configuration values before running the application.
 
 ## API Endpoints
 
