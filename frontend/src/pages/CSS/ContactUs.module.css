@@ -1,0 +1,32 @@
+/* Contact Details Section */
+.boxSection {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.boxSection div {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.boxSection div:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  background-color: #292929;
+}
+
+.boxSection h2 {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.boxSection p {
+  color: #e5e5e5;
+  line-height: 1.5;
+}

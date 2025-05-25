@@ -1,0 +1,21 @@
+{
+  "name": "coursework-group_85",
+  "version": "1.0.0",
+  "description": "This project is a full-stack application designed for booking and reserving movies. It consists of a frontend built with React and a backend built with Node.js and Express. The backend uses MongoDB as the database to store data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Plymouth-University/coursework-group_85.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Plymouth-University/coursework-group_85/issues"
+  },
+  "homepage": "https://github.com/Plymouth-University/coursework-group_85#readme"
+}

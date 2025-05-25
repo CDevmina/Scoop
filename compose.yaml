@@ -1,0 +1,51 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - VITE_PAYPAL_CLIENT_ID=${VITE_PAYPAL_CLIENT_ID}
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - BACKEND_URL=${BACKEND_URL}
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - NODE_PORT=${NODE_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - NODE_ENV=${NODE_ENV}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - REDIS_URL=${REDIS_URL}
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass ${REDIS_PASSWORD} --bind 0.0.0.0
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge

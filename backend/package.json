@@ -1,0 +1,32 @@
+{
+  "name": "movie-booking-api",
+  "version": "1.0.0",
+  "description": "API for managing a movie booking application, including user and admin functionalities.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node src/index.js",
+    "test": "jest --verbose"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect": "^3.2.0",
+    "connect-redis": "^8.0.1",
+    "cors": "^2.8.5",
+    "express-session": "^1.18.1",
+    "js-yaml": "^3.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.11.0",
+    "oas3-tools": "^2.2.3",
+    "redis": "^4.7.0",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

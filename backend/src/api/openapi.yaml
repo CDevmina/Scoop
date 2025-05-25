@@ -1,0 +1,861 @@
+openapi: 3.0.0
+info:
+  title: Movie Booking API
+  description:
+    "API for managing a movie booking application, including user and admin\
+    \ functionalities."
+  license:
+    name: ""
+  version: 1.0.0
+servers:
+  - url: "http://localhost:${PORT}"
+    description: API Auto Mocking Server
+security:
+  - BearerAuth: []
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register a new user
+      operationId: authRegisterPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegister"
+        required: true
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Invalid input
+      security: []
+      x-swagger-router-controller: Authentication
+    options:
+      tags:
+        - Authentication
+      summary: CORS preflight
+      operationId: authLoginOPTIONS
+      responses:
+        "204":
+          description: No Content
+      security: []
+      x-swagger-router-controller: Authentication
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login a user
+      operationId: authLoginPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLogin"
+        required: true
+      responses:
+        "200":
+          description: Login successful
+        "401":
+          description: Unauthorized
+      security: []
+      x-swagger-router-controller: Authentication
+  /auth/update-password:
+    put:
+      tags:
+        - Authentication
+      summary: Update user password
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePassword"
+        required: true
+      responses:
+        "200":
+          description: Password updated successfully
+        "400":
+          description: Invalid input
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Authentication
+  /auth/user:
+    get:
+      tags:
+        - Authentication
+      summary: Get user details
+      operationId: getUserDetails
+      responses:
+        "200":
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Authentication
+    options:
+      tags:
+        - Authentication
+      summary: CORS preflight
+      operationId: authLoginOPTIONS
+      responses:
+        "204":
+          description: No Content
+      security: []
+      x-swagger-router-controller: Authentication
+  /auth/delete:
+    delete:
+      tags:
+        - Authentication
+      summary: Delete user profile
+      operationId: deleteUserProfile
+      responses:
+        "204":
+          description: User profile deleted successfully
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Authentication
+  /auth/is-admin:
+    get:
+      tags:
+        - Authentication
+      summary: Check if user is an admin
+      operationId: isAdmin
+      responses:
+        "200":
+          description: User is an admin
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Authentication
+  /auth/update:
+    put:
+      tags:
+        - Authentication
+      summary: Update user profile
+      operationId: updateUserProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+        required: true
+      responses:
+        "200":
+          description: User profile updated successfully
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Authentication
+  /movies:
+    get:
+      tags:
+        - Movies
+      summary: Get a list of movies
+      operationId: moviesGET
+      responses:
+        "200":
+          description: A list of movies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Movie"
+                x-content-type: application/json
+      security: []
+      x-swagger-router-controller: Movies
+    post:
+      tags:
+        - Movies
+      summary: Add a new movie
+      operationId: addMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Movie"
+        required: true
+      responses:
+        "201":
+          description: Movie added successfully
+        "400":
+          description: Invalid input
+      security:
+        - AdminAuth: []
+      x-swagger-router-controller: Movies
+  /movies/{movieId}:
+    get:
+      tags:
+        - Movies
+      summary: Get details of a specific movie
+      operationId: getMovieById
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of the movie
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Movie details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Movie"
+        "404":
+          description: Movie not found
+      security: []
+      x-swagger-router-controller: Movies
+    put:
+      tags:
+        - Movies
+      summary: Update an existing movie
+      operationId: updateMovie
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of the movie
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Movie"
+        required: true
+      responses:
+        "200":
+          description: Movie updated successfully
+        "400":
+          description: Invalid input
+        "404":
+          description: Movie not found
+      security:
+        - AdminAuth: []
+      x-swagger-router-controller: Movies
+    delete:
+      tags:
+        - Movies
+      summary: Delete a movie
+      operationId: deleteMovie
+      parameters:
+        - name: movieId
+          in: path
+          description: ID of the movie
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Movie deleted successfully
+        "404":
+          description: Movie not found
+      security:
+        - AdminAuth: []
+      x-swagger-router-controller: Movies
+  /booking:
+    get:
+      tags:
+        - Bookings
+      summary: Get a list of bookings
+      operationId: getBookings
+      responses:
+        "200":
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+                x-content-type: application/json
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+    post:
+      tags:
+        - Bookings
+      summary: Create a new booking
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
+        required: true
+      responses:
+        "201":
+          description: Booking created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+  /booking/{bookingId}:
+    get:
+      tags:
+        - Bookings
+      summary: Get details of a specific booking
+      operationId: getBookingById
+      parameters:
+        - name: bookingId
+          in: path
+          description: ID of the booking
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Booking not found
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+    delete:
+      tags:
+        - Bookings
+      summary: Delete a specific booking
+      operationId: deleteBooking
+      parameters:
+        - name: bookingId
+          in: path
+          description: ID of the booking
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Booking deleted successfully
+        "401":
+          description: Unauthorized
+        "404":
+          description: Booking not found
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+  /booking/showtime/{showtimeId}:
+    get:
+      tags:
+        - Bookings
+      summary: Get details for a specific showtime
+      operationId: getShowtimeDetails
+      parameters:
+        - name: showtimeId
+          in: path
+          description: ID of the showtime
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Details of the showtime
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ShowtimeDetails"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+  /booking/payment:
+    post:
+      tags:
+        - Bookings
+      summary: Process payment for a booking
+      operationId: processPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bookingNumber
+                - paypalOrderId
+                - paymentMethod
+                - amount
+              properties:
+                bookingNumber:
+                  type: string
+                  example: "BK1234567890123"
+                paymentMethod:
+                  type: string
+                  enum: ["PAYPAL"]
+                amount:
+                  type: number
+                  format: float
+                paypalOrderId:
+                  type: string
+                  example: "5O190127TN364715T"
+      responses:
+        "200":
+          description: Payment processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+    get:
+      tags:
+        - Bookings
+      summary: Get payment history of a user
+      operationId: getPaymentHistory
+      responses:
+        "200":
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Payment"
+                x-content-type: application/json
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Bookings
+  /booking/session:
+    post:
+      tags:
+        - BookingSessions
+      summary: Create a new booking session
+      operationId: createBookingSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - showtimeId
+                - selectedSeats
+                - adultTickets
+                - childTickets
+              properties:
+                showtimeId:
+                  type: string
+                  example: "60f1b7e7c50b02b4c8cfc047"
+                bookingNumber:
+                  type: string
+                  example: "BK1234567890123"
+                selectedSeats:
+                  type: array
+                  items:
+                    type: string
+                  example: ["A1", "A2"]
+                adultTickets:
+                  type: integer
+                  example: 2
+                childTickets:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionId:
+                    type: string
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Sessions
+
+  /booking/session/{sessionId}:
+    get:
+      tags:
+        - BookingSessions
+      summary: Get booking session details
+      operationId: getBookingSession
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Session details retrieved successfully
+        "404":
+          description: Session not found
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Sessions
+    put:
+      tags:
+        - BookingSessions
+      summary: Update a booking session
+      operationId: updateBookingSession
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - showtimeId
+                - selectedSeats
+                - adultTickets
+                - childTickets
+              properties:
+                showtimeId:
+                  type: string
+                  example: "60f1b7e7c50b02b4c8cfc047"
+                selectedSeats:
+                  type: array
+                  items:
+                    type: string
+                  example: ["A1", "A2"]
+                adultTickets:
+                  type: integer
+                  example: 2
+                childTickets:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Session updated successfully
+        "404":
+          description: Session not found
+        "400":
+          description: Invalid input
+      security:
+        - BearerAuth: []
+      x-swagger-router-controller: Sessions
+components:
+  schemas:
+    UserRegister:
+      required:
+        - email
+        - firstName
+        - lastName
+        - password
+        - phone
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: password123
+        isAdmin:
+          type: boolean
+          example: false
+        phone:
+          type: string
+          example: "1234567890"
+    UserLogin:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: password123
+    UpdatePassword:
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: oldpassword123
+        newPassword:
+          type: string
+          example: newpassword123
+    UserDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        phone:
+          type: string
+          example: "1234567890"
+    Movie:
+      required:
+        - title
+        - description
+        - releaseDate
+        - duration
+        - genre
+        - rating
+        - ageRating
+        - tallBanner
+        - wideBanner
+        - actors
+        - director
+        - cinemas
+        - adultTicketPrice
+        - kidTicketPrice
+      type: object
+      properties:
+        title:
+          type: string
+          example: "The Dark Knight"
+        description:
+          type: string
+          example: "A gripping tale of Batman's fight against the Joker."
+        releaseDate:
+          type: string
+          format: date
+          example: "2008-07-18"
+        duration:
+          type: integer
+          example: 152
+        genre:
+          type: string
+          example: "Action"
+        rating:
+          type: string
+          example: "8.3"
+        ageRating:
+          type: string
+          example: "PG-13"
+        tallBanner:
+          type: string
+          example: "https://example.com/tall-banner.jpg"
+        wideBanner:
+          type: string
+          example: "https://example.com/wide-banner.jpg"
+        actors:
+          type: array
+          items:
+            type: string
+          example: ["Christian Bale", "Heath Ledger"]
+        director:
+          type: string
+          example: "Christopher Nolan"
+        cinemas:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "SCOPE CINEMA - Colpetty"
+              formats:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: "Digital 2D"
+                    showtimes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          showtimeId:
+                            type: string
+                            example: "60f1b7e7c50b02b4c8cfc047"
+                          time:
+                            type: string
+                            example: "10:30AM"
+                          date:
+                            type: string
+                            format: date
+                            example: "2024-12-30"
+        adultTicketPrice:
+          type: number
+          format: float
+          example: 1500.00
+        kidTicketPrice:
+          type: number
+          format: float
+          example: 1000.00
+    Booking:
+      required:
+        - bookingNumber
+        - movieId
+        - showtimeId
+        - seats
+      type: object
+      properties:
+        bookingNumber:
+          type: string
+          example: 640f1b7e7c50b02b4c8cfc01
+        movieId:
+          type: string
+          example: 640f1b7e7c50b02b4c8cfc03
+        showtimeId:
+          type: string
+          example: 60f1b7e7c50b02b4c8cfc047
+        paypalOrderId:
+          type: string
+          example: "pay_123456789"
+        status:
+          type: string
+          enum: ["PENDING", "CONFIRMED", "CANCELLED"]
+        amount:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        seats:
+          type: array
+          items:
+            type: object
+            properties:
+              seatNumber:
+                type: string
+                example: "A1"
+        adultTickets:
+          type: integer
+          example: 2
+        childTickets:
+          type: integer
+          example: 1
+    ShowtimeDetails:
+      type: object
+      properties:
+        showtimeId:
+          type: string
+          example: "60f1b7e7c50b02b4c8cfc047"
+        movieId:
+          type: string
+          example: "677440d9cebe72b504c24e80"
+        movieTitle:
+          type: string
+          example: "The Dark Knight"
+        cinemaLocation:
+          type: string
+          example: "SCOPE CINEMA - Colpetty"
+        theatreType:
+          type: string
+          example: "Digital 2D"
+        time:
+          type: string
+          example: "10:30AM"
+        date:
+          type: string
+          format: date
+          example: "2024-12-30"
+        adultTicketPrice:
+          type: number
+          format: float
+          example: 1500.00
+        kidTicketPrice:
+          type: number
+          format: float
+          example: 1000.00
+        bookedSeats:
+          type: array
+          items:
+            type: string
+            example: "A1"
+        tallBanner:
+          type: string
+          example: "https://example.com/tall-banner.jpg"
+    Payment:
+      type: object
+      required:
+        - bookingNumber
+        - amount
+        - paymentMethod
+        - status
+      properties:
+        paypalOrderId:
+          type: string
+          example: "pay_123456789"
+        bookingNumber:
+          type: string
+          example: "BK1234567890123"
+        amount:
+          type: number
+          format: float
+          example: 3000.00
+        paymentMethod:
+          type: string
+          enum: ["PAYPAL"]
+          example: "PAYPAL"
+        status:
+          type: string
+          enum: ["PENDING", "COMPLETED", "FAILED"]
+          example: "COMPLETED"
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    AdminAuth:
+      type: http
+      scheme: bearer

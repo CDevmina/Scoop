@@ -1,0 +1,362 @@
+/* Global/Element Styling */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #121212; /* Black background */
+  color: #ffffff; /* White text for contrast */
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Page Wrapper */
+.aboutUsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #121212; /* Match body background */
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.contentWrapper {
+  width: 80%;
+  max-width: 1200px;
+  background-color: #1e1e1e; /* Darker shade for content */
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+}
+
+/* Breadcrumb Section */
+.breadcrumbSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333333; /* Subtle divider */
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff; /* White text */
+}
+
+.breadcrumbNav {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbLink {
+  text-decoration: none;
+  color: #cccccc; /* Light gray */
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.breadcrumbLink:hover {
+  color: #e5090f; /* Highlight color */
+}
+
+.breadcrumbIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 5px;
+}
+
+.breadcrumbCurrent {
+  display: flex;
+  align-items: center;
+  color: #777777;
+  font-size: 1rem;
+}
+
+.breadcrumbArrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin: 0 5px;
+}
+
+/* Hero Section */
+.heroSection {
+  margin: 20px 0 30px;
+}
+
+.heroImage {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff; /* White titles */
+  margin-bottom: 20px;
+}
+
+/* About Section */
+.aboutSection {
+  margin: 30px 0;
+}
+
+.sectionText {
+  font-size: 1.1rem;
+  color: #cccccc; /* Light gray text */
+  margin-top: 10px;
+  text-align: justify;
+}
+
+/* Vision and Mission Section */
+.visionMissionSection {
+  margin: 50px 0;
+}
+
+.visionMissionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.card {
+  flex: 1 1 calc(50% - 20px);
+  background-color: #1e1e1e; /* Darker background */
+  color: #ffffff; /* White text */
+  border: 1px solid #333333; /* Subtle border */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.cardText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cccccc;
+  text-align: justify;
+}
+
+/* Branches Section */
+.branchesSection {
+  margin: 50px 0;
+}
+
+.branchesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.branchCard {
+  flex: 1 1 calc(50% - 20px);
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.branchCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+.branchImage {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.branchTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.branchDetails {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 15px;
+}
+
+/* Our Team Section */
+.teamSection {
+  margin: 50px 0;
+}
+
+.teamContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.teamCard {
+  flex: 1 1 calc(33.333% - 20px);
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teamCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+.teamImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  border: 3px solid #333333;
+}
+
+.teamTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.teamRole {
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+.teamTags {
+  font-size: 0.9rem;
+  color: #777777;
+  margin-bottom: 15px;
+}
+
+.teamIcons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+
+.teamIcons a:hover {
+  transform: scale(1.2);
+}
+
+.teamIcons a:nth-child(1):hover {
+  color: #d93025;
+}
+
+.teamIcons a:nth-child(2):hover {
+  color: #0077b5;
+}
+
+.teamIcons a:nth-child(3):hover {
+  color: #ffffff;
+}
+
+.teamIcons a:nth-child(4):hover {
+  color: #e4405f;
+}
+
+.teamIcons a:nth-child(5):hover {
+  color: #1da1f2;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .contentWrapper {
+    width: 95%;
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .breadcrumbSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pageTitle {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .breadcrumbNav {
+    margin-top: 10px;
+  }
+
+  .heroImage {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .visionMissionContainer,
+  .branchesContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card,
+  .branchCard {
+    flex: 1 1 100%;
+  }
+
+  .teamCard {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.8rem;
+  }
+
+  .breadcrumbLink,
+  .breadcrumbCurrent {
+    font-size: 0.9rem;
+  }
+
+  .sectionText {
+    font-size: 1rem;
+  }
+
+  .teamCard {
+    flex: 1 1 100%;
+  }
+}

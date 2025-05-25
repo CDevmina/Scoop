@@ -1,0 +1,569 @@
+/* Seats.module.css */
+
+/* Container Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000; /* Black background */
+  padding: 20px;
+  box-sizing: border-box;
+  color: white; /* Ensure text is readable */
+}
+
+.mainContent {
+  width: 100%;
+  background-color: #1a1a1a; /* Dark gray for contrast */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.timerBox {
+  border: 2px solid red;
+  background-color: red;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  color: white;
+  font-size: 0.75rem;
+  height: 33px;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 0.5px;
+  background-color: #eeeeee; /* Very Light Gray */
+  margin: 16px 0;
+}
+
+/* Showtime Details */
+.showtimeDetails {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.detailText {
+  font-weight: bold;
+}
+
+/* Showtime Buttons */
+.showtimes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Changed from center to flex-start */
+}
+
+.showtimeLabel {
+  font-size: 1rem;
+  font-weight: normal;
+  color: white;
+  margin-right: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.showtimeButton {
+  padding: 6px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.showtimeButton:hover:not(:disabled) {
+  background-color: #444;
+}
+
+.selectedShowtime {
+  background-color: red;
+  color: white;
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Seat Grid Styles */
+.seatGridContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #000; /* Dark background for Seat Map */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.screen {
+  width: 100%;
+  max-width: calc(23 * 30px + 22 * 4px); /* Match grid width */
+  height: 25px;
+  background-color: #444;
+  border-radius: 50px 50px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.screenText {
+  color: white;
+}
+
+.seatGrid {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  grid-template-columns: repeat(23, 30px); /* Fixed width for consistency */
+  justify-items: center;
+  align-items: center;
+  border: 2px solid #666;
+  border-radius: 8px;
+  background-color: #000; /* Black background for seat grid */
+}
+
+.seat {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 10px;
+  background-color: #333;
+  color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.selected {
+  background-color: red;
+  color: white;
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.reserved {
+  background-color: #4169e1; /* Royal Blue */
+  color: white;
+  cursor: not-allowed;
+}
+
+.locked {
+  background-color: #810000c1;
+  color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.seat:hover:not(.selected):not(.locked):not(.reserved) {
+  background-color: #444;
+}
+
+/* Legend Styles */
+.legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.legendBox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+.selectedLegend {
+  background-color: red;
+  border-color: red;
+}
+
+.available {
+  background-color: #333;
+  border-color: #555;
+}
+
+.reserved {
+  background-color: #4169e1; /* Royal Blue */
+  border-color: #4169e1;
+}
+
+.unavailableLegend {
+  background-color: #f2d2bd;
+  border-color: #f2d2bd;
+}
+
+/* Ticket Selection Styles */
+.ticketSelectionContainer {
+  width: 100%;
+  background: #1a1a1a; /* Dark gray background for Ticket Selection */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  text-align: center;
+  gap: 10px;
+}
+
+.ticketHeader {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.ticketTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.ticketType {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.ticketLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.ticketPrice {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.ticketControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticketControls button {
+  background-color: #333;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ticketControls button:disabled {
+  border-color: #555;
+  color: #555;
+  cursor: not-allowed;
+}
+
+.ticketControls span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.totalPrice {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Action Buttons */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 0px;
+}
+
+.actionButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actionButton:disabled {
+  background-color: #555;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.backButton {
+  background-color: #444;
+  color: white;
+}
+
+.backButton:hover:not(:disabled) {
+  background-color: #666;
+}
+
+.proceedButton {
+  background-color: red;
+  color: white;
+}
+
+.proceedButton:hover:not(:disabled) {
+  background-color: #ff6666;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .mainContent {
+    padding: 16px;
+  }
+
+  .showtimes {
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Ensure alignment is left on tablet */
+  }
+
+  .showtimeButton {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .timerBox {
+    font-size: 0.7rem;
+    height: auto;
+    padding: 2px 6px;
+  }
+
+  .seatGrid {
+    grid-template-columns: repeat(15, 25px);
+    gap: 3px;
+  }
+
+  .seat {
+    width: 25px;
+    height: 25px;
+    font-size: 8px;
+  }
+
+  .ticketSelectionContainer {
+    padding: 16px;
+    min-height: 300px;
+  }
+
+  .ticketTypes {
+    max-width: 100%;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .mainContent {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .timerBox {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .divider {
+    margin: 12px 0;
+  }
+
+  .showtimeDetails {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .showtimes {
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start instead of center */
+    gap: 6px;
+    justify-content: flex-start; /* Ensure left alignment */
+  }
+
+  .showtimeButton {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .screen {
+    height: 20px;
+  }
+
+  .screenText {
+    font-size: 0.75rem;
+  }
+
+  .seatGridContainer {
+    padding: 10px;
+  }
+
+  .seatGrid {
+    grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
+    overflow-x: auto;
+    padding: 5px;
+    max-width: 100%;
+  }
+
+  .seat {
+    width: 25px;
+    height: 25px;
+    font-size: 8px;
+  }
+
+  .legend {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .legendItem {
+    font-size: 0.8rem;
+  }
+
+  .ticketSelectionContainer {
+    padding: 16px;
+    min-height: 350px;
+  }
+
+  .ticketTypes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticketType {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ticketLabel {
+    align-items: center;
+    text-align: center;
+  }
+
+  .ticketControls {
+    gap: 6px;
+  }
+
+  .totalPrice {
+    font-size: 1rem;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .actionButton {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .showtimeButton {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+
+  .seatGrid {
+    grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+    gap: 2px;
+  }
+
+  .seat {
+    width: 20px;
+    height: 20px;
+    font-size: 7px;
+  }
+
+  .legendBox {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ticketSelectionContainer {
+    min-height: 300px;
+  }
+
+  .totalPrice {
+    font-size: 0.95rem;
+  }
+}

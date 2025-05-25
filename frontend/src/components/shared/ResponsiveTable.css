@@ -1,0 +1,12 @@
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: -1rem;
+  padding: 1rem;
+}
+
+@media (max-width: 640px) {
+  .table-container {
+    font-size: 0.875rem;
+  }
+}
