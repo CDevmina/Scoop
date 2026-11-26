@@ -27,6 +27,7 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
       - REDIS_URL=${REDIS_URL:-redis://default:${REDIS_PASSWORD}@redis:6379}
+      - DEMO_MODE=${DEMO_MODE:-true}
     depends_on:
       - mongodb
       - redis

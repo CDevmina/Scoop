@@ -12,6 +12,10 @@ import {
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import LoadingScreen from "../components/LoadingScreen";
 
+// Without a PayPal client ID the site runs in demo mode: Pay Now confirms
+// the booking without taking any payment.
+const DEMO_PAYMENT = !import.meta.env.VITE_PAYPAL_CLIENT_ID;
+
 const Payment = () => {
   const navigate = useNavigate();
 
@@ -158,6 +162,10 @@ const Payment = () => {
       alert("Please accept the terms and conditions");
       return;
     }
+    if (DEMO_PAYMENT) {
+      onApprove({ orderID: `DEMO-${Date.now()}` }, "DEMO");
+      return;
+    }
     setShowPayPalButtons(true);
   };
 
@@ -184,7 +192,7 @@ const Payment = () => {
     }
   };
 
-  const onApprove = async (data) => {
+  const onApprove = async (data, paymentMethod = "PAYPAL") => {
     try {
       const paypalOrderId = await data.orderID;
 
@@ -206,7 +214,7 @@ const Payment = () => {
       const paymentData = {
         bookingNumber: booking.bookingNumber,
         paypalOrderId: paypalOrderId,
-        paymentMethod: "PAYPAL",
+        paymentMethod,
         amount: parseFloat(totals.total),
         status: "COMPLETED",
       };
@@ -592,6 +600,13 @@ const Payment = () => {
                   facility
                 </label>
               </div>
+
+              {DEMO_PAYMENT && (
+                <p className="text-sm text-yellow-300 mt-4">
+                  Demo mode: no real payment is taken. Pay Now confirms the
+                  booking straight away.
+                </p>
+              )}
 
               {/* Buttons */}
               <div className={styles.buttonContainer}>

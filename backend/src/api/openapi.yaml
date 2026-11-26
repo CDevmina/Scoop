@@ -422,7 +422,7 @@ paths:
                   example: "BK1234567890123"
                 paymentMethod:
                   type: string
-                  enum: ["PAYPAL"]
+                  enum: ["PAYPAL", "DEMO"]
                 amount:
                   type: number
                   format: float
@@ -840,7 +840,7 @@ components:
           example: 3000.00
         paymentMethod:
           type: string
-          enum: ["PAYPAL"]
+          enum: ["PAYPAL", "DEMO"]
           example: "PAYPAL"
         status:
           type: string
