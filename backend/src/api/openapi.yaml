@@ -602,9 +602,6 @@ components:
         password:
           type: string
           example: password123
-        isAdmin:
-          type: boolean
-          example: false
         phone:
           type: string
           example: "1234567890"

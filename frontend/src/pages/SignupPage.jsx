@@ -213,20 +213,6 @@ const SignupPage = () => {
             </div>
           </div>
 
-          <div className="flex items-center mt-4">
-            <input
-              {...register("isAdmin")}
-              type="checkbox"
-              id="isAdmin"
-              className="w-4 h-4 appearance-none checked:bg-red-600 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              htmlFor="isAdmin"
-              className="ml-2 block text-sm/6 font-medium text-white"
-            >
-              Register as an admin?
-            </label>
-          </div>
 
           {signupError && (
             <div className="flex items-center justify-center space-x-2 p-4 mb-4 rounded-md bg-red-100 border border-red-400">

@@ -43,7 +43,8 @@ exports.authLoginPOST = async function (body) {
  **/
 exports.authRegisterPOST = async function (body) {
   const db = getDB();
-  const { firstName, lastName, email, password, phone, isAdmin = false } = body;
+  // isAdmin is never taken from the request. Admins are created by the seed script.
+  const { firstName, lastName, email, password, phone } = body;
 
   try {
     const existingUser = await db.collection('users').findOne({ email });
@@ -58,7 +59,7 @@ exports.authRegisterPOST = async function (body) {
       email,
       password: hashedPassword,
       phone,
-      isAdmin
+      isAdmin: false
     };
 
     await db.collection('users').insertOne(newUser);
