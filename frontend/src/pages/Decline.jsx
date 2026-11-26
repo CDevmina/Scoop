@@ -44,7 +44,7 @@ function App() {
           Need help? Contact Scoop Cinemas on
           <span className="font-medium text-gray-100">
             {" "}
-            +94 76 208 3065 - (Gagana){" "}
+            011 234 5678{" "}
           </span>
         </p>
       </div>
