@@ -10,8 +10,13 @@ var { connectDB } = require('./utils/mongoUtil');
 var { verifyJWT, verifyAdminJWT } = require('./middleware/authMiddleware');
 var { initializeSocket } = require('./utils/socketUtil');
 
+if (!process.env.JWT_SECRET) {
+    console.error('JWT_SECRET is not set. Copy .env.example to .env and fill it in.');
+    process.exit(1);
+}
+
 var serverPort = process.env.NODE_PORT || 5001;
-const mongoUri = process.env.MONGO_URI || 'mongodb://admin:admin@mongodb/movie_booking?authSource=admin';
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/scoopCinema';
 
 // swaggerRouter configuration
 var options = {

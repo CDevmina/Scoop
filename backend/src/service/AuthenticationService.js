@@ -5,7 +5,8 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
 
-const secretKey = process.env.JWT_SECRET || 'your_secret_key';
+// Checked at startup in index.js
+const secretKey = process.env.JWT_SECRET;
 
 /**
  * Login a user

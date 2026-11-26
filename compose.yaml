@@ -21,28 +21,36 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - MONGO_URI=${MONGO_URI}
-      - NODE_PORT=${NODE_PORT}
-      - JWT_SECRET=${JWT_SECRET}
-      - NODE_ENV=${NODE_ENV}
-      - FRONTEND_URL=${FRONTEND_URL}
-      - REDIS_URL=${REDIS_URL}
+      - MONGO_URI=${MONGO_URI:-mongodb://mongodb:27017/scoopCinema}
+      - NODE_PORT=${NODE_PORT:-5001}
+      - JWT_SECRET=${JWT_SECRET:?set JWT_SECRET in .env}
+      - NODE_ENV=${NODE_ENV:-development}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
+      - REDIS_URL=${REDIS_URL:-redis://default:${REDIS_PASSWORD}@redis:6379}
+    depends_on:
+      - mongodb
+      - redis
     networks:
       - app-network
     restart: unless-stopped
 
+  mongodb:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
   redis:
-    image: redis:latest
-    command: redis-server --requirepass ${REDIS_PASSWORD} --bind 0.0.0.0
-    container_name: redis
-    ports:
-      - "6379:6379"
+    image: redis:7-alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}
     volumes:
       - redis-data:/data
     networks:
       - app-network
 
 volumes:
+  mongo-data:
   redis-data:
 
 networks:
