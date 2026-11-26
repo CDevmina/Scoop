@@ -105,6 +105,11 @@ exports.processPayment = async function (body, userId) {
       throw new Error('Booking already processed');
     }
 
+    // Demo payments are only accepted when the server runs in demo mode
+    if (body.paymentMethod === 'DEMO' && process.env.DEMO_MODE !== 'true') {
+      throw new Error('Demo payments are disabled');
+    }
+
     // Check payment status and PayPal order ID
     const isPaymentSuccessful = body.status === 'COMPLETED' && body.paypalOrderId;
 

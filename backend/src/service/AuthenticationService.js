@@ -5,7 +5,20 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
 
-const secretKey = process.env.JWT_SECRET || 'your_secret_key';
+// Checked at startup in index.js
+const secretKey = process.env.JWT_SECRET;
+
+// The shared demo account is shown on the login page, so visitors must not
+// be able to lock others out of it.
+async function assertNotDemoUser(db, userId) {
+  const user = await db.collection('users').findOne(
+    { _id: ObjectId.createFromHexString(userId) },
+    { projection: { isDemo: 1 } }
+  );
+  if (user && user.isDemo) {
+    throw new Error('The demo account cannot be changed');
+  }
+}
 
 /**
  * Login a user
@@ -43,7 +56,8 @@ exports.authLoginPOST = async function (body) {
  **/
 exports.authRegisterPOST = async function (body) {
   const db = getDB();
-  const { firstName, lastName, email, password, phone, isAdmin = false } = body;
+  // isAdmin is never taken from the request. Admins are created by the seed script.
+  const { firstName, lastName, email, password, phone } = body;
 
   try {
     const existingUser = await db.collection('users').findOne({ email });
@@ -58,7 +72,7 @@ exports.authRegisterPOST = async function (body) {
       email,
       password: hashedPassword,
       phone,
-      isAdmin
+      isAdmin: false
     };
 
     await db.collection('users').insertOne(newUser);
@@ -77,6 +91,7 @@ exports.authRegisterPOST = async function (body) {
  **/
 exports.updatePassword = async function (userId, body) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   const { oldPassword, newPassword } = body;
 
   try {
@@ -130,6 +145,7 @@ exports.getUserDetails = async function (userId) {
  **/
 exports.deleteUserProfile = async function (userId) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   try {
     const result = await db.collection('users').deleteOne({ _id: ObjectId.createFromHexString(userId) });
     if (result.deletedCount === 0) {
@@ -174,6 +190,7 @@ exports.isAdmin = async function (userId) {
  **/
 exports.updateUserProfile = async function (userId, body) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   const { firstName, lastName, phone } = body;
 
   try {

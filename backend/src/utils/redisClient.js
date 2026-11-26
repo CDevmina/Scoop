@@ -1,15 +1,11 @@
 const Redis = require('redis');
 
 const redisClient = Redis.createClient({
-    url: process.env.REDIS_URL || 'redis://default:200409@redis:6379',
+    url: process.env.REDIS_URL || 'redis://localhost:6379',
     socket: {
-        reconnectStrategy: (retries) => {
-            if (retries > 10) {
-                console.error('Max reconnection attempts reached');
-                return new Error('Max reconnection attempts reached');
-            }
-            return Math.min(retries * 100, 3000);
-        }
+        // Keep retrying. Giving up leaves the client closed for good, which
+        // breaks seat locking until the API restarts.
+        reconnectStrategy: (retries) => Math.min(retries * 200, 5000)
     }
 });
 

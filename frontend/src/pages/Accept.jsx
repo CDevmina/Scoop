@@ -129,7 +129,7 @@ function App() {
             </button>
             <p className="text-sm text-gray-400">
               Need help? Contact us at{" "}
-              <span className="text-white">+94 76 208 3065 - (Gagana)</span>
+              <span className="text-white">011 234 5678</span>
             </p>
           </div>
         </div>

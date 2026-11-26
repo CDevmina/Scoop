@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.BACKEND_URL || 'http://localhost:5001';
+// Vite only exposes env vars that start with VITE_, and only at build time.
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 const getHeaders = () => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');

@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "seed": "node src/scripts/seed.js"
   },
   "keywords": [
     "swagger"
@@ -28,5 +29,10 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/src/tests/setupEnv.js"
+    ]
   }
 }

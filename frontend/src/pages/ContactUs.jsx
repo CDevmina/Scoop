@@ -345,8 +345,8 @@ const ContactUsPage = () => {
               Marketing & Advertising
             </h2>
             <p className="text-white">
-              <FontAwesomeIcon icon={faPhone} /> 0766248951 - Gagana <br />
-              <FontAwesomeIcon icon={faEnvelope} /> gagana@scoopcinemas.com
+              <FontAwesomeIcon icon={faPhone} /> 011 234 5678 <br />
+              <FontAwesomeIcon icon={faEnvelope} /> marketing@scoop.demo
             </p>
           </div>
 
@@ -356,7 +356,7 @@ const ContactUsPage = () => {
             </h2>
             <p className="text-white">
               Sydney Opera House <br />
-              <FontAwesomeIcon icon={faPhone} /> 0112083064 <br />
+              <FontAwesomeIcon icon={faPhone} /> 011 234 5678 <br />
             </p>
           </div>
 
@@ -364,8 +364,8 @@ const ContactUsPage = () => {
             <h2 className="text-lg font-bold text-white mb-2">Help Desk</h2>
             <p className="text-white">
               Open: 9:00 AM - 6:00 PM (Monday - Friday) <br />
-              <FontAwesomeIcon icon={faPhone} /> 01125564869 / 0765497521 <br />
-              <FontAwesomeIcon icon={faEnvelope} /> helpdesk@scoopcinemas.com
+              <FontAwesomeIcon icon={faPhone} /> 011 234 5678 <br />
+              <FontAwesomeIcon icon={faEnvelope} /> help@scoop.demo
             </p>
           </div>
         </div>

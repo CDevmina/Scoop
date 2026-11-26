@@ -51,10 +51,10 @@ const Footer = () => {
 
             <h4 className="text-lg font-bold mt-4 mb-2">Contacts</h4>
             <p className="text-sm flex items-center gap-2">
-              <FaPhone className="text-xl" /> 0761823473
+              <FaPhone className="text-xl" /> 011 234 5678
             </p>
             <a
-              href="mailto:aura@aura.com"
+              href="mailto:hello@scoop.demo"
               className="
                 mt-2 text-sm flex items-center gap-2
                 transition-colors duration-200
@@ -62,7 +62,7 @@ const Footer = () => {
               "
             >
               <FaEnvelope className={`text-xl ${hoverIcon}`} />
-              aura@aura.com
+              hello@scoop.demo
             </a>
 
             <h4 className="text-lg font-bold mt-4 mb-2">Office Address</h4>
@@ -217,14 +217,14 @@ const Footer = () => {
             <div>
               <h4 className="text-lg font-bold mb-2">Contacts</h4>
               <p className="text-sm flex items-center gap-2">
-                <FaPhone className="text-xl" /> 0761823473
+                <FaPhone className="text-xl" /> 011 234 5678
               </p>
               <a
-                href="mailto:aura@aura.com"
+                href="mailto:hello@scoop.demo"
                 className="mt-2 text-sm flex items-center gap-2 transition-colors duration-200 hover:text-gray-400"
               >
                 <FaEnvelope className={`text-xl ${hoverIcon}`} />
-                aura@aura.com
+                hello@scoop.demo
               </a>
             </div>
             <div>
