@@ -6,6 +6,10 @@ import AuthContext from "../context/AuthContext";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
+// Public demo account, created by backend/src/scripts/seed.js
+const DEMO_EMAIL = import.meta.env.VITE_DEMO_EMAIL || "demo@scoop.demo";
+const DEMO_PASSWORD = import.meta.env.VITE_DEMO_PASSWORD || "ScoopDemo2026";
+
 const LoginPage = () => {
   const [loginError, setLoginError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -41,6 +45,21 @@ const LoginPage = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mb-8 rounded-md border border-gray-600 bg-gray-800 p-4 text-sm text-gray-200">
+          <p className="font-semibold text-white">Just looking around?</p>
+          <p className="mt-1">
+            Use the demo account: <span className="font-mono">{DEMO_EMAIL}</span>{" "}
+            / <span className="font-mono">{DEMO_PASSWORD}</span>
+          </p>
+          <button
+            type="button"
+            onClick={() => onSubmit({ email: DEMO_EMAIL, password: DEMO_PASSWORD })}
+            className="mt-3 w-full rounded-md bg-secondary px-3 py-1.5 font-semibold text-white hover:opacity-90"
+          >
+            Log in as demo user
+          </button>
+        </div>
+
         <form
           className="space-y-6"
           method="POST"
