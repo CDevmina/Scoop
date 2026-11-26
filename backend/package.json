@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "seed": "node src/scripts/seed.js"
   },
   "keywords": [
     "swagger"

@@ -8,6 +8,18 @@ const { ObjectId } = require('mongodb');
 // Checked at startup in index.js
 const secretKey = process.env.JWT_SECRET;
 
+// The shared demo account is shown on the login page, so visitors must not
+// be able to lock others out of it.
+async function assertNotDemoUser(db, userId) {
+  const user = await db.collection('users').findOne(
+    { _id: ObjectId.createFromHexString(userId) },
+    { projection: { isDemo: 1 } }
+  );
+  if (user && user.isDemo) {
+    throw new Error('The demo account cannot be changed');
+  }
+}
+
 /**
  * Login a user
  *
@@ -79,6 +91,7 @@ exports.authRegisterPOST = async function (body) {
  **/
 exports.updatePassword = async function (userId, body) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   const { oldPassword, newPassword } = body;
 
   try {
@@ -132,6 +145,7 @@ exports.getUserDetails = async function (userId) {
  **/
 exports.deleteUserProfile = async function (userId) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   try {
     const result = await db.collection('users').deleteOne({ _id: ObjectId.createFromHexString(userId) });
     if (result.deletedCount === 0) {
@@ -176,6 +190,7 @@ exports.isAdmin = async function (userId) {
  **/
 exports.updateUserProfile = async function (userId, body) {
   const db = getDB();
+  await assertNotDemoUser(db, userId);
   const { firstName, lastName, phone } = body;
 
   try {
