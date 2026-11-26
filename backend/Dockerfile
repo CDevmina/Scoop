@@ -1,27 +1,13 @@
-# Stage 1: Build Stage
-FROM node:20-alpine as build
-
-# Set the working directory
+FROM node:20-alpine
+ENV NODE_ENV=production
 WORKDIR /app
 
-# Install dependencies
+# Production dependencies only
 COPY backend/package*.json ./
-RUN npm install
+RUN npm ci --omit=dev --ignore-scripts
 
-# Copy the backend code
 COPY backend/ .
 
-# Stage 2: Production Stage
-FROM node:18-alpine
-
-# Set the working directory
-WORKDIR /app
-
-# Copy only the necessary files from the build stage
-COPY --from=build /app /app
-
-# Expose the backend API port
+USER node
 EXPOSE 5001
-
-# Start the Express server
 CMD ["node", "src/index.js"]
