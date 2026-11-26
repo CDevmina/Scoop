@@ -3,8 +3,12 @@ FROM node:20-alpine as build
 
 # Define build arguments for environment variables
 ARG VITE_PAYPAL_CLIENT_ID
-# Set environment variables during the build process
-ENV VITE_PAYPAL_CLIENT_ID=$VITE_PAYPAL_CLIENT_ID
+ARG VITE_API_URL=http://localhost:5001
+ARG VITE_SOCKET_URL
+# Vite bakes these into the bundle at build time
+ENV VITE_PAYPAL_CLIENT_ID=$VITE_PAYPAL_CLIENT_ID \
+    VITE_API_URL=$VITE_API_URL \
+    VITE_SOCKET_URL=$VITE_SOCKET_URL
 
 # Set the working directory
 WORKDIR /app
